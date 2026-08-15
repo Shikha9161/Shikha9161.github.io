@@ -41,6 +41,25 @@
 }
 
 /* ===== light theme ===== */
+[data-theme="light"] {
+  --bg-primary: #faf9f7;
+  --bg-secondary: #f1efe9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f6f1;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --accent-1: #b45309;
+  --accent-2: #d97706;
+  --accent-3: #b45309;
+  --accent-4: #92400e;
+  --gradient-main: linear-gradient(135deg, #92400e, #b45309, #d97706);
+  --gradient-text: linear-gradient(135deg, #92400e, #b45309, #d97706);
+  --gradient-glow: linear-gradient(135deg, rgba(180,83,9,0.08), rgba(217,119,6,0.08));
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -51,6 +70,7 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 ::selection { background: var(--accent-1); color: #fff; }
@@ -112,6 +132,7 @@ nav.scrolled { border-bottom-color: var(--border); }
   border-bottom: 1px solid var(--border); transition: color 0.3s; }
 .mobile-nav a:last-child { border-bottom: none; }
 .mobile-nav a:hover { color: var(--accent-3); }
+[data-theme="light"] .mobile-nav { background: var(--bg-primary); }
 
 @media(max-width:900px) { .navlinks { display: none; } .menu-toggle { display: block; } }
 @media(max-width:560px) { .nav-cta { display: none; } }
@@ -337,6 +358,42 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
 .footer-social a:hover { border-color: var(--accent-1); color: var(--accent-3); background: rgba(217,119,6,0.06); }
 @media(max-width:560px) { .footer-content { flex-direction: column; gap: 16px; } }
 
+/* ===== light theme overrides ===== */
+[data-theme="light"] .ambient-orb { opacity: 0.15; }
+[data-theme="light"] .orb-1 { background: rgba(217,119,6,0.12); }
+[data-theme="light"] .orb-2 { background: rgba(245,158,11,0.08); }
+[data-theme="light"] .orb-3 { background: rgba(251,191,36,0.06); }
+[data-theme="light"] body::before { opacity: 0; }
+[data-theme="light"] nav { background: rgba(250,249,247,0.8); }
+[data-theme="light"] .nav-cta { color: #fff; }
+[data-theme="light"] .btn-primary { color: #fff; box-shadow: 0 4px 20px rgba(180,83,9,0.25), inset 0 1px 0 rgba(255,255,255,0.2); }
+[data-theme="light"] .btn-primary:hover { box-shadow: 0 8px 40px rgba(180,83,9,0.35); }
+[data-theme="light"] .btn-secondary { background: rgba(0,0,0,0.03); }
+[data-theme="light"] .glass-card { backdrop-filter: blur(12px); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+[data-theme="light"] .glass-card::before { background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(217,119,6,0.05), transparent 60%); }
+[data-theme="light"] .skill-tag { background: rgba(0,0,0,0.02); }
+[data-theme="light"] .skill-tag:hover { background: rgba(180,83,9,0.06); }
+[data-theme="light"] .tl-content::before { background: var(--bg-primary); }
+[data-theme="light"] .cert-badge { background: rgba(180,83,9,0.06); }
+[data-theme="light"] .contact-link { background: rgba(255,255,255,0.8); }
+[data-theme="light"] .contact-link:hover { background: rgba(180,83,9,0.04); }
+[data-theme="light"] .footer-social a:hover { background: rgba(180,83,9,0.06); }
+[data-theme="light"] ::selection { background: var(--accent-2); color: #fff; }
+[data-theme="light"] #progress { box-shadow: 0 0 20px rgba(180,83,9,0.4); }
+
+/* ===== theme toggle button ===== */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
+  background: var(--bg-glass); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  font-size: 1rem; color: var(--text-secondary); transition: all 0.3s;
+  margin-left: 12px; flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent-1); color: var(--accent-3); transform: rotate(30deg); }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
 /* ===== comprehensive responsive ===== */
 @media(max-width:768px) {
@@ -376,6 +433,7 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
   .cta-sub { font-size: 0.95rem; }
   .contact-links { gap: 10px; }
   .contact-link { font-size: 0.78rem; padding: 10px 16px; }
+  .theme-toggle { width: 36px; height: 36px; font-size: 0.9rem; }
 }
 
 @media(max-width:400px) {
@@ -415,7 +473,11 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <a href="#contact" class="nav-cta">Let's Talk</a>
-<button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun icon-sun"></i>
+        <i class="fa-solid fa-moon icon-moon"></i>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
         <i class="fa-solid fa-bars" id="menuIcon"></i>
       </button>
     </div>
@@ -809,7 +871,26 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
 (function(){
   const isTouch = matchMedia('(hover:none),(pointer:coarse)').matches;
 
-/* ===== mobile menu ===== */
+  /* ===== theme toggle ===== */
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if(saved === 'light') { html.dataset.theme = 'light'; }
+  else if(saved === 'dark') { delete html.dataset.theme; }
+  else if(matchMedia('(prefers-color-scheme: light)').matches) { html.dataset.theme = 'light'; }
+
+  function isLight(){ return html.dataset.theme === 'light'; }
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    if(isLight()){
+      delete html.dataset.theme;
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.dataset.theme = 'light';
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  /* ===== mobile menu ===== */
   const menuToggle = document.getElementById('menuToggle');
   const menuIcon = document.getElementById('menuIcon');
   const mobileNav = document.getElementById('mobileNav');
