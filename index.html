@@ -115,7 +115,22 @@ nav.scrolled { border-bottom-color: var(--border); }
 .nav-cta { font-size: 0.8rem; font-weight: 600; padding: 10px 22px; border-radius: var(--radius-full);
   background: var(--gradient-main); color: #fff; transition: transform 0.2s, box-shadow 0.3s; }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(217,119,6,0.35); }
-@media(max-width:900px) { .navlinks { display: none; } }
+/* mobile menu */
+.menu-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; color: var(--text-secondary); font-size: 1.1rem; cursor: pointer; transition: all 0.3s; }
+.menu-toggle:hover { border-color: var(--accent-1); color: var(--accent-3); }
+.mobile-nav { display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+  background: var(--bg-primary); border-bottom: 1px solid var(--border); padding: 20px 28px;
+  flex-direction: column; gap: 16px; backdrop-filter: blur(20px);
+  transform: translateY(-10px); opacity: 0; transition: all 0.3s var(--ease); pointer-events: none; }
+.mobile-nav.open { display: flex; transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-nav a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); padding: 10px 0;
+  border-bottom: 1px solid var(--border); transition: color 0.3s; }
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: var(--accent-3); }
+[data-theme="light"] .mobile-nav { background: var(--bg-primary); }
+
+@media(max-width:900px) { .navlinks { display: none; } .menu-toggle { display: block; } }
 @media(max-width:560px) { .nav-cta { display: none; } }
 
 /* ===== reveal ===== */
@@ -370,6 +385,59 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
 [data-theme="light"] .theme-toggle .icon-sun { display: block; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
+/* ===== comprehensive responsive ===== */
+@media(max-width:768px) {
+  .wrap { padding: 0 18px; }
+  section { padding: 70px 0; }
+  nav { padding: 0 18px; }
+  .nav-inner { height: 64px; }
+  .logo { font-size: 1.1rem; }
+  #hero { min-height: 100svh; padding: 100px 0 50px; }
+  h1.hero-name { font-size: clamp(2.6rem, 12vw, 4rem); margin-bottom: 18px; }
+  .hero-badge { font-size: 0.75rem; padding: 6px 14px 6px 6px; margin-bottom: 24px; }
+  .hero-desc { font-size: 0.95rem; margin-bottom: 28px; }
+  .hero-actions { gap: 10px; margin-bottom: 40px; }
+  .btn { font-size: 0.82rem; padding: 12px 22px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .hero-stat-num { font-size: 1.4rem; }
+  .hero-stat-label { font-size: 0.7rem; }
+  .sec-header { margin-bottom: 36px; }
+  .sec-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .glass-card { padding: 24px; }
+  .about-main p { font-size: 0.95rem; }
+  .stat-number { font-size: 2rem; }
+  .skill-card { padding: 22px; }
+  .skill-icon { width: 38px; height: 38px; font-size: 0.95rem; margin-bottom: 14px; }
+  .skill-title { font-size: 0.88rem; }
+  .skill-tag { font-size: 0.68rem; padding: 5px 10px; }
+  .tl-role { font-size: 1.05rem; }
+  .tl-bullets li { font-size: 0.85rem; }
+  .project-card { padding: 28px; }
+  .proj-title { font-size: 1.3rem; }
+  .proj-desc { font-size: 0.88rem; }
+  .proj-icon { width: 48px; height: 48px; font-size: 1.1rem; }
+  .edu-title { font-size: 0.88rem; }
+  .edu-sub { font-size: 0.75rem; }
+  #contact { padding: 80px 0 70px; }
+  .cta-title { font-size: clamp(2rem, 8vw, 3rem); }
+  .cta-sub { font-size: 0.95rem; }
+  .contact-links { gap: 10px; }
+  .contact-link { font-size: 0.78rem; padding: 10px 16px; }
+  .theme-toggle { width: 36px; height: 36px; font-size: 0.9rem; }
+}
+
+@media(max-width:400px) {
+  .wrap { padding: 0 14px; }
+  h1.hero-name { font-size: 2.4rem; }
+  .hero-badge { font-size: 0.68rem; }
+  .hero-stats { gap: 16px; }
+  .hero-stat-num { font-size: 1.2rem; }
+  .btn { font-size: 0.78rem; padding: 11px 18px; gap: 8px; }
+  .glass-card { padding: 18px; border-radius: 12px; }
+  .contact-links { flex-direction: column; align-items: center; }
+  .contact-link { width: 100%; justify-content: center; }
+}
+
 /* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -393,15 +461,26 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
       <a href="#projects" class="nl">Projects</a>
       <a href="#education" class="nl">Education</a>
     </div>
-    <div style="display:flex;align-items:center;gap:0;">
+    <div style="display:flex;align-items:center;gap:8px;">
       <a href="#contact" class="nav-cta">Let's Talk</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <i class="fa-solid fa-sun icon-sun"></i>
         <i class="fa-solid fa-moon icon-moon"></i>
       </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
     </div>
   </div>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" class="mnl">About</a>
+  <a href="#skills" class="mnl">Skills</a>
+  <a href="#experience" class="mnl">Experience</a>
+  <a href="#projects" class="mnl">Projects</a>
+  <a href="#education" class="mnl">Education</a>
+  <a href="#contact" class="mnl">Contact</a>
+</div>
 
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
@@ -711,6 +790,24 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
       html.dataset.theme = 'light';
       localStorage.setItem('theme', 'light');
     }
+  });
+
+  /* ===== mobile menu ===== */
+  const menuToggle = document.getElementById('menuToggle');
+  const menuIcon = document.getElementById('menuIcon');
+  const mobileNav = document.getElementById('mobileNav');
+  let menuOpen = false;
+  menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileNav.classList.toggle('open', menuOpen);
+    menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+  document.querySelectorAll('.mnl').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileNav.classList.remove('open');
+      menuIcon.className = 'fa-solid fa-bars';
+    });
   });
 
   /* ===== progress bar ===== */
