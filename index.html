@@ -291,19 +291,25 @@ section { position: relative; z-index: 2; padding: 100px 0; }
 .tl-bullets li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 1px; background: var(--accent-2); }
 
 /* ===== projects ===== */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+@media(max-width:400px) { .projects-grid { grid-template-columns: 1fr; } }
 .project-card {
-  padding: 40px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+  padding: 28px; display: flex; flex-direction: column; gap: 14px; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-@media(max-width:600px) { .project-card { grid-template-columns: 1fr; } }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(217,119,6,0.12); }
+.proj-header { display: flex; align-items: center; justify-content: space-between; }
 .proj-badge { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; color: var(--accent-3);
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 0.08em;
   display: inline-flex; align-items: center; gap: 8px; }
 .proj-badge i { font-size: 0.65rem; }
-.proj-title { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; margin-bottom: 12px; letter-spacing: -0.01em; }
-.proj-desc { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; margin-bottom: 18px; max-width: 600px; }
-.proj-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.proj-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
-  background: var(--gradient-glow); border: 1px solid var(--border); font-size: 1.4rem; color: var(--accent-3); }
+.proj-title { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; }
+.proj-desc { color: var(--text-secondary); line-height: 1.7; font-size: 0.88rem; flex: 1; }
+.proj-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.proj-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  background: var(--gradient-glow); border: 1px solid var(--border); font-size: 1.2rem; color: var(--accent-3); flex-shrink: 0; }
+.proj-links { display: flex; gap: 12px; margin-top: 8px; }
+.proj-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-3); display: inline-flex; align-items: center; gap: 6px; transition: color 0.3s; }
+.proj-link:hover { color: var(--accent-2); }
 
 /* ===== education ===== */
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
@@ -519,8 +525,8 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
         <div class="hero-stat-label">Patent Filed</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num" data-count="500" data-suffix="+">0</div>
-        <div class="hero-stat-label">Connections</div>
+        <div class="hero-stat-num" data-count="10" data-suffix="+">0</div>
+        <div class="hero-stat-label">Projects</div>
       </div>
     </div>
   </div>
@@ -670,21 +676,109 @@ footer { text-align: center; padding: 40px 0 50px; position: relative; z-index: 
   <div class="wrap">
     <div class="sec-header reveal">
       <div class="sec-label">Portfolio</div>
-      <h2 class="sec-title">Featured Project</h2>
+      <h2 class="sec-title">Featured Projects</h2>
     </div>
-    <div class="glass-card project-card reveal">
-      <div>
-        <div class="proj-badge"><i class="fa-solid fa-certificate"></i> Patent Filed</div>
+    <div class="projects-grid">
+
+      <div class="glass-card project-card reveal">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-certificate"></i> Patent Filed</div>
+          <div class="proj-icon"><i class="fa-solid fa-droplet"></i></div>
+        </div>
         <div class="proj-title">Water Footprint Calculator</div>
-        <p class="proj-desc">A patented digital solution designed to calculate water footprint &mdash; transforming a complex environmental measurement challenge into a structured, accessible tool. Active since January 2024.</p>
+        <p class="proj-desc">A patented digital solution to calculate water footprint &mdash; transforming complex environmental measurement into a structured, accessible tool.</p>
         <div class="proj-tags">
           <span class="skill-tag">Patent</span>
-          <span class="skill-tag">Digital Solution</span>
           <span class="skill-tag">Environmental Tech</span>
           <span class="skill-tag">Data Analysis</span>
         </div>
       </div>
-      <div class="proj-icon"><i class="fa-solid fa-droplet"></i></div>
+
+      <div class="glass-card project-card reveal reveal-delay-1">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-mobile-screen-button"></i> Flutter App</div>
+          <div class="proj-icon"><i class="fa-solid fa-comments"></i></div>
+        </div>
+        <div class="proj-title">Chat Application</div>
+        <p class="proj-desc">Real-time messaging app built with Flutter and Dart featuring user authentication, live chat, and a clean modern interface.</p>
+        <div class="proj-tags">
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+          <span class="skill-tag">Firebase</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/Shikha9161/chat_app_flutter" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Source</a>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal reveal-delay-2">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-plane"></i> Flutter App</div>
+          <div class="proj-icon"><i class="fa-solid fa-earth-americas"></i></div>
+        </div>
+        <div class="proj-title">Travel Design App</div>
+        <p class="proj-desc">A beautifully designed travel companion app in Flutter featuring destination exploration, trip planning, and stunning UI components.</p>
+        <div class="proj-tags">
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+          <span class="skill-tag">UI/UX</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/Shikha9161/travel_design" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Source</a>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-cloud-sun"></i> Web App</div>
+          <div class="proj-icon"><i class="fa-solid fa-cloud-bolt"></i></div>
+        </div>
+        <div class="proj-title">Weather App</div>
+        <p class="proj-desc">A weather forecasting application that fetches real-time weather data using APIs to display conditions, temperature, and forecasts.</p>
+        <div class="proj-tags">
+          <span class="skill-tag">API Integration</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">REST API</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/Shikha9161/weather_app" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Source</a>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal reveal-delay-1">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-server"></i> Full Stack</div>
+          <div class="proj-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+        </div>
+        <div class="proj-title">Auth System (Node.js)</div>
+        <p class="proj-desc">A full-stack user registration and login system built with Node.js, Express, and MongoDB with secure authentication flows.</p>
+        <div class="proj-tags">
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/Shikha9161/Node.js-Register-Login-App" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Source</a>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal reveal-delay-2">
+        <div class="proj-header">
+          <div class="proj-badge"><i class="fa-solid fa-calculator"></i> Desktop App</div>
+          <div class="proj-icon"><i class="fa-solid fa-heartbeat"></i></div>
+        </div>
+        <div class="proj-title">BMI Calculator</div>
+        <p class="proj-desc">A health-focused BMI calculator application built with C++ that computes body mass index and provides health category feedback.</p>
+        <div class="proj-tags">
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Health Tech</span>
+          <span class="skill-tag">Algorithms</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/Shikha9161/bmi_calculator" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Source</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
